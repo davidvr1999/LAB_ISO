@@ -24,7 +24,7 @@ public class AgenteBD {
 			prop = new Properties();
 			String propFileName = "config.properties";
 
-			inputStream = ConnectionSQLite.class.getClassLoader().getResourceAsStream(propFileName);
+			inputStream = AgenteBD.class.getClassLoader().getResourceAsStream(propFileName);
 
 			if (inputStream != null) {
 				prop.load(inputStream);
