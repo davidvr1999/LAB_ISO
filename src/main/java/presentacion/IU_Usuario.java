@@ -13,17 +13,37 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.awt.Toolkit;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.Rectangle;
 
 public class IU_Usuario {
 
-	private JFrame frame;
-	private JTextField txtDni;
-	private JTextField textField;
-	private GestorUsuario gu;
-	private JTextField txtNSanitario;
-	private JTextField txtEmail;
-	private JTextField txtNTarjeta;
-	private JTextField txtDNIResponsable;
+	private static JFrame frmCovidlandiak;
+	private static JTextField txtDni;
+	private static JTextField textField;
+	private static GestorUsuario gu;
+	private static JTextField txtNSanitario;
+	private static JTextField txtEmail;
+	private static JTextField txtNTarjeta;
+	private static JButton btnRegistro;
+	private static JComboBox cBRol;
+	private static JLabel lblNSanitario;
+	private static JLabel lblEmail;
+	private static JLabel lblNTarjeta;
+	private static JButton btnVivienda;
+
+	public static JFrame getFrmCovidlandiak() {
+		return frmCovidlandiak;
+	}
+
+	public static JButton getBtnVivienda() {
+		return btnVivienda;
+	}
 
 	/**
 	 * Launch the application.
@@ -33,7 +53,7 @@ public class IU_Usuario {
 			public void run() {
 				try {
 					IU_Usuario window = new IU_Usuario();
-					window.frame.setVisible(true);
+					window.frmCovidlandiak.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,89 +71,159 @@ public class IU_Usuario {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private static void initialize() {
 		gu = new GestorUsuario();
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 685, 555);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmCovidlandiak = new JFrame();
+		frmCovidlandiak.getContentPane().setBackground(Color.WHITE);
+		frmCovidlandiak.setTitle("COVIDLANDIA 2K19 - Registro de Usuario.");
+		frmCovidlandiak.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\img\\icon\\icon.png"));
+		frmCovidlandiak.setResizable(false);
+		frmCovidlandiak.setBounds(100, 100, 592, 555);
+		frmCovidlandiak.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCovidlandiak.getContentPane().setLayout(null);
+		frmCovidlandiak.setLocationRelativeTo(null);
 		
-		JLabel lblDNI = new JLabel("DNI");
-		lblDNI.setBounds(67, 57, 47, 14);
-		frame.getContentPane().add(lblDNI);
+		JLabel lblDNI = new JLabel("DNI:");
+		lblDNI.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDNI.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblDNI.setBounds(188, 66, 74, 23);
+		frmCovidlandiak.getContentPane().add(lblDNI);
 		
 		txtDni = new JTextField();
-		txtDni.setBounds(142, 54, 136, 20);
-		frame.getContentPane().add(txtDni);
+		txtDni.setFont(new Font("Arial", Font.PLAIN, 20));
+		txtDni.setBounds(290, 63, 150, 30);
+		frmCovidlandiak.getContentPane().add(txtDni);
 		txtDni.setColumns(10);
 		
-		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(67, 98, 47, 14);
-		frame.getContentPane().add(lblNombre);
+		JLabel lblNombre = new JLabel("Nombre completo:");
+		lblNombre.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNombre.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblNombre.setBounds(88, 115, 174, 38);
+		frmCovidlandiak.getContentPane().add(lblNombre);
 		
 		textField = new JTextField();
-		textField.setBounds(142, 95, 136, 20);
-		frame.getContentPane().add(textField);
+		textField.setBounds(new Rectangle(0, 0, 150, 30));
+		textField.setFont(new Font("Arial", Font.PLAIN, 20));
+		textField.setBounds(290, 120, 150, 30);
+		frmCovidlandiak.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Rol");
-		lblNewLabel.setBounds(67, 147, 47, 14);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel lblNewLabel = new JLabel("Rol:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblNewLabel.setBounds(126, 189, 136, 18);
+		frmCovidlandiak.getContentPane().add(lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Personal sanitario", "Responsable de vivienda", "Ciudadano"}));
-		comboBox.setBounds(142, 143, 136, 22);
-		frame.getContentPane().add(comboBox);
+		cBRol = new JComboBox();
+		cBRol.setBounds(new Rectangle(0, 0, 150, 30));
+		cBRol.setFont(new Font("Arial", Font.PLAIN, 12));
+		cBRol.setModel(new DefaultComboBoxModel(new String[] {"", "Personal sanitario", "Responsable de vivienda", "Ciudadano"}));
+		cBRol.setBounds(290, 184, 150, 30);
+		cBRol.addItemListener(gu.selectTypeUser());
+		frmCovidlandiak.getContentPane().add(cBRol);
 		
-		JButton btnNewButton = new JButton("Registrar");
-		btnNewButton.addActionListener(gu.btnSUser());
-		btnNewButton.setBounds(128, 235, 106, 23);
-		frame.getContentPane().add(btnNewButton);
+		btnRegistro = new JButton("Registrar");
+		btnRegistro.setEnabled(false);
+		btnRegistro.addActionListener(gu.btnSUser());
+		btnRegistro.setBounds(290, 434, 150, 30);
+		frmCovidlandiak.getContentPane().add(btnRegistro);
 		
-		JLabel lblNSanitario = new JLabel("Nº Sanitario");
-		lblNSanitario.setBounds(398, 57, 74, 14);
-		frame.getContentPane().add(lblNSanitario);
+		lblNSanitario = new JLabel("Nº Sanitario:");
+		lblNSanitario.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNSanitario.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblNSanitario.setVisible(false);
+		lblNSanitario.setBounds(104, 278, 158, 23);
+		frmCovidlandiak.getContentPane().add(lblNSanitario);
 		
 		txtNSanitario = new JTextField();
-		txtNSanitario.setBounds(507, 54, 96, 20);
-		frame.getContentPane().add(txtNSanitario);
+		txtNSanitario.setBounds(new Rectangle(0, 0, 150, 30));
+		txtNSanitario.setFont(new Font("Arial", Font.PLAIN, 20));
+		txtNSanitario.setVisible(false);
+		txtNSanitario.setBounds(290, 275, 150, 30);
+		frmCovidlandiak.getContentPane().add(txtNSanitario);
 		txtNSanitario.setColumns(10);
 		
-		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(396, 147, 47, 14);
-		frame.getContentPane().add(lblEmail);
+		lblEmail = new JLabel("Email:");
+		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEmail.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblEmail.setVisible(false);
+		lblEmail.setBounds(139, 265, 123, 20);
+		frmCovidlandiak.getContentPane().add(lblEmail);
 		
 		txtEmail = new JTextField();
-		txtEmail.setBounds(507, 144, 96, 20);
-		frame.getContentPane().add(txtEmail);
+		txtEmail.setBounds(new Rectangle(0, 0, 150, 30));
+		txtEmail.setFont(new Font("Arial", Font.PLAIN, 20));
+		txtEmail.setVisible(false);
+		txtEmail.setBounds(290, 261, 150, 30);
+		frmCovidlandiak.getContentPane().add(txtEmail);
 		txtEmail.setColumns(10);
 		
-		JLabel lblNTarjeta = new JLabel("Nº Tarjeta");
-		lblNTarjeta.setBounds(396, 187, 74, 14);
-		frame.getContentPane().add(lblNTarjeta);
+		lblNTarjeta = new JLabel("Nº Tarjeta sanitaria:");
+		lblNTarjeta.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNTarjeta.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblNTarjeta.setVisible(false);
+		lblNTarjeta.setBounds(68, 320, 194, 38);
+		frmCovidlandiak.getContentPane().add(lblNTarjeta);
 		
 		txtNTarjeta = new JTextField();
-		txtNTarjeta.setBounds(507, 184, 96, 20);
-		frame.getContentPane().add(txtNTarjeta);
+		txtNTarjeta.setBounds(new Rectangle(0, 0, 150, 30));
+		txtNTarjeta.setFont(new Font("Arial", Font.PLAIN, 20));
+		txtNTarjeta.setVisible(false);
+		txtNTarjeta.setBounds(290, 325, 150, 30);
+		frmCovidlandiak.getContentPane().add(txtNTarjeta);
 		txtNTarjeta.setColumns(10);
 		
-		txtDNIResponsable = new JTextField();
-		txtDNIResponsable.setBounds(507, 269, 96, 20);
-		frame.getContentPane().add(txtDNIResponsable);
-		txtDNIResponsable.setColumns(10);
-		
-		JLabel lblDNIResponsable = new JLabel("DNI Responsable");
-		lblDNIResponsable.setBounds(398, 272, 101, 14);
-		frame.getContentPane().add(lblDNIResponsable);
-		
-		JLabel lblTipoVivienda = new JLabel("Tipo Vivienda");
-		lblTipoVivienda.setBounds(396, 311, 76, 14);
-		frame.getContentPane().add(lblTipoVivienda);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Residencia/Hotel", "Particular"}));
-		comboBox_1.setBounds(507, 307, 96, 22);
-		frame.getContentPane().add(comboBox_1);
+		btnVivienda = new JButton("Vivienda/s");
+		btnVivienda.setVisible(false);
+		btnVivienda.setBounds(290, 383, 150, 30);
+		frmCovidlandiak.getContentPane().add(btnVivienda);
+	}
+
+	public static JFrame getFrame() {
+		return frmCovidlandiak;
+	}
+
+	public static JTextField getTxtDni() {
+		return txtDni;
+	}
+
+	public static JTextField getTextField() {
+		return textField;
+	}
+
+	public static GestorUsuario getGu() {
+		return gu;
+	}
+
+	public static JTextField getTxtNSanitario() {
+		return txtNSanitario;
+	}
+
+	public static JTextField getTxtEmail() {
+		return txtEmail;
+	}
+
+	public static JTextField getTxtNTarjeta() {
+		return txtNTarjeta;
+	}
+
+	public static JButton getBtnRegistro() {
+		return btnRegistro;
+	}
+
+	public static JComboBox getcBRol() {
+		return cBRol;
+	}
+
+	public static JLabel getLblNSanitario() {
+		return lblNSanitario;
+	}
+
+	public static JLabel getLblEmail() {
+		return lblEmail;
+	}
+
+	public static JLabel getLblNTarjeta() {
+		return lblNTarjeta;
 	}
 }
