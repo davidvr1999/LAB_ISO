@@ -1,12 +1,18 @@
 package dominio;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class GestorUsuario {
 
-	public void autenticar() {
-		throw new UnsupportedOperationException();
-	}
+	
+	public ActionListener btnSUser() {
 
-	public void dar_de_alta() {
-		throw new UnsupportedOperationException();
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					System.out.println("Caca de vaca!");
+			}
+
+		};
 	}
 }
