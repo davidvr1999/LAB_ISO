@@ -1,4 +1,4 @@
-package dominio;
+package main.java.dominio;
 
 public class Responsable extends Usuario {
 	private Vivienda _vivienda;

@@ -1,4 +1,4 @@
-package dominio;
+package main.java.dominio;
 
 public class Informe {
 	private String _numero;

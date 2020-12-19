@@ -1,31 +1,50 @@
-package dominio;
+package main.java.dominio;
 
 public class Usuario {
-	protected String _dni;
-	protected String _nombre;
-	protected String _rol;
+    protected String dni;
+    protected String nombre;
+    protected String rol;
 
-	public void setDni(String aDni) {
-		this._dni = aDni;
-	}
+    public Usuario() {
+        super();
+    }
 
-	public String getDni() {
-		return this._dni;
-	}
+    public Usuario(String dni, String nombre, String rol) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.rol = rol;
+    }
 
-	public void setNombre(String aNombre) {
-		this._nombre = aNombre;
-	}
+    public void setDni(String aDni) {
+        this.dni = aDni;
+    }
 
-	public String getNombre() {
-		return this._nombre;
-	}
+    public String getDni() {
+        return this.dni;
+    }
 
-	public void setRol(String aRol) {
-		this._rol = aRol;
-	}
+    public void setNombre(String aNombre) {
+        this.nombre = aNombre;
+    }
 
-	public String getRol() {
-		return this._rol;
-	}
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public void setRol(String aRol) {
+        this.rol = aRol;
+    }
+
+    public String getRol() {
+        return this.rol;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "dni='" + dni + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", rol='" + rol + '\'' +
+                '}';
+    }
 }

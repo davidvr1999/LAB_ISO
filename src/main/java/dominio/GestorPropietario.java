@@ -1,16 +1,18 @@
-package dominio;
+package main.java.dominio;
+
 
 public class GestorPropietario {
 
-	public void darDeAltaVivienda() {
-		throw new UnsupportedOperationException();
-	}
 
-	public void darDeAltaInquilino() {
-		throw new UnsupportedOperationException();
-	}
+    public void darDeAltaVivienda() {
+        //TODO: futuras versiones
+    }
 
-	public void InformarResidentes() {
-		throw new UnsupportedOperationException();
-	}
+    public void darDeAltaInquilino() {
+        //TODO: futuras versiones
+    }
+
+    public void InformarResidentes() {
+        //TODO: futuras versiones
+    }
 }

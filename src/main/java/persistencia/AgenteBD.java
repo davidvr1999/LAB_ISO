@@ -1,4 +1,4 @@
-package persistencia;
+package main.java.persistencia;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -7,44 +7,46 @@ import java.sql.DriverManager;
 import java.util.Properties;
 
 public class AgenteBD {
-	
+
 //	  Esto venia aqui pero no tiene mucho sentido 
 //	  public Usuario usuario; 
 //	  public Vivienda vivienda; 
 //	  public Ayuntamiento ayuntamiento;
-	 
 
-	private static Connection CONNECTION;
 
-	public static void dbConnector() {
+    private static Connection CONNECTION;
 
-		InputStream inputStream = null;
-		Properties prop = null;
-		try {
-			prop = new Properties();
-			String propFileName = "config.properties";
+    public static Connection dbConnector() {
 
-			inputStream = AgenteBD.class.getClassLoader().getResourceAsStream(propFileName);
+        InputStream inputStream = null;
+        Properties prop = null;
+        try {
+            prop = new Properties();
+            String propFileName = "config.properties";
 
-			if (inputStream != null) {
-				prop.load(inputStream);
-			} else {
-				throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
-			}
+            inputStream = AgenteBD.class.getClassLoader().getResourceAsStream(propFileName);
 
-			Class.forName("org.sqlite.JDBC");
-			CONNECTION = DriverManager.getConnection(prop.getProperty("DRIVER") + ":"
-					+ prop.getProperty("CONNECTION_STRING") + prop.getProperty("DBNAME"));
-			CONNECTION.setAutoCommit(Boolean.FALSE);
+            if (inputStream != null) {
+                prop.load(inputStream);
+            } else {
+                throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+            }
 
-			inputStream.close();
-		} catch (Exception e) {
-			System.out.println("Exception: " + e);
-		}
+            Class.forName("org.sqlite.JDBC");
+            CONNECTION = DriverManager.getConnection(prop.getProperty("DRIVER") + ":"
+                    + prop.getProperty("CONNECTION_STRING") + prop.getProperty("DBNAME"));
+            CONNECTION.setAutoCommit(Boolean.FALSE);
 
-	}
+            inputStream.close();
+        } catch (Exception e) {
+            System.out.println("Exception: " + e);
+        }
 
-	public static Connection getConnection() {
-		return CONNECTION;
-	}
+        return CONNECTION;
+
+    }
+
+    public static Connection getConnection() {
+        return CONNECTION;
+    }
 }

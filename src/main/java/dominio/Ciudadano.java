@@ -1,40 +1,44 @@
-package dominio;
+package main.java.dominio;
 
 public class Ciudadano extends Usuario {
-	private boolean _positivo;
-	private String _email;
-	private String _nTarjetaSanitaria;
-	
-	public Informe informe;
+    private boolean positivo;
+    private String email;
+    private String nTarjetaSanitaria;
 
-	public Ciudadano(boolean _positivo, String _email, String _nTarjetaSanitaria, Informe informe) {
-		this._positivo = _positivo;
-		this._email = _email;
-		this._nTarjetaSanitaria = _nTarjetaSanitaria;
-		this.informe = informe;
-	}
+    public Informe informe;
 
-	public void setPositivo(boolean aPositivo) {
-		this._positivo = aPositivo;
-	}
+    public Ciudadano() {
+        super();
+    }
 
-	public boolean isPositivo() {
-		return this._positivo;
-	}
+    public Ciudadano(boolean positivo, String email, String nTarjetaSanitaria, Informe informe) {
+        this.positivo = positivo;
+        this.email = email;
+        this.nTarjetaSanitaria = nTarjetaSanitaria;
+        this.informe = informe;
+    }
 
-	public void setEmail(String aEmail) {
-		this._email = aEmail;
-	}
+    public void setPositivo(boolean aPositivo) {
+        this.positivo = aPositivo;
+    }
 
-	public String getEmail() {
-		return this._email;
-	}
+    public boolean getPositivo() {
+        return this.positivo;
+    }
 
-	public void setNTarjetaSanitaria(String aNTarjetaSanitaria) {
-		this._nTarjetaSanitaria = aNTarjetaSanitaria;
-	}
+    public void setEmail(String aEmail) {
+        this.email = aEmail;
+    }
 
-	public String getNTarjetaSanitaria() {
-		return this._nTarjetaSanitaria;
-	}
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setNTarjetaSanitaria(String aNTarjetaSanitaria) {
+        this.nTarjetaSanitaria = aNTarjetaSanitaria;
+    }
+
+    public String getNTarjetaSanitaria() {
+        return this.nTarjetaSanitaria;
+    }
 }

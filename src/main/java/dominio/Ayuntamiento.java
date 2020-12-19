@@ -1,4 +1,4 @@
-package dominio;
+package main.java.dominio;
 
 import java.util.Vector;
 
