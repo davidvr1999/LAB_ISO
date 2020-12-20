@@ -1,13 +1,15 @@
-package main.java.dominio;
+package dominio;
 
 public class Responsable extends Usuario {
-	private Vivienda _vivienda;
-
-	public void setVivienda(Vivienda aVivienda) {
-		this._vivienda = aVivienda;
+	private String email;
+	public Responsable(String dni, String nombre,String email, String rol) {
+		super(dni, nombre, rol);
+		this.email=email;
 	}
-
-	public Vivienda getVivienda() {
-		return this._vivienda;
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

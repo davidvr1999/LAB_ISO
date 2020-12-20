@@ -1,4 +1,4 @@
-package main.java.dominio;
+package dominio;
 
 public class Ciudadano extends Usuario {
     private boolean positivo;

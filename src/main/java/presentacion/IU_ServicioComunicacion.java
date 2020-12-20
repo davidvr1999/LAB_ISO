@@ -1,4 +1,4 @@
-package main.java.presentacion;
+package presentacion;
 
 public class IU_ServicioComunicacion {
 }

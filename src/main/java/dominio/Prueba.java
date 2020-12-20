@@ -1,4 +1,4 @@
-package main.java.dominio;
+package dominio;
 
 public class Prueba {
 	private Ciudadano _ciudadano = getCiudadano();

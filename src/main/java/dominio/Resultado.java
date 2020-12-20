@@ -1,4 +1,4 @@
-package main.java.dominio;
+package dominio;
 
 public class Resultado {
 	private boolean _positivo;

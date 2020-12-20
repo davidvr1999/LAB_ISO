@@ -1,6 +1,6 @@
-package main.java.dominio;
+package dominio;
 
-import main.java.persistencia.AgenteBD;
+import persistencia.AgenteBD;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.*;

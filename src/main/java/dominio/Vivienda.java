@@ -1,31 +1,48 @@
-package main.java.dominio;
+package dominio;
 
 public class Vivienda {
-	private Ciudadano _ciudadano;
-	private Responsable _responsable;
-	private String _tipo;
+	private Ciudadano ciudadano;
+	private Responsable responsable;
+	private String direccion;
+	private String tipo;
 
-	public void setCiudadano(Ciudadano aCiudadano) {
-		this._ciudadano = aCiudadano;
+	public Vivienda(Ciudadano ciudadano, Responsable responsable, String direccion, String tipo) {
+		this.ciudadano = ciudadano;
+		this.responsable = responsable;
+		this.direccion = direccion;
+		this.tipo = tipo;
 	}
 
 	public Ciudadano getCiudadano() {
-		return this._ciudadano;
-	}
-
-	public void setResponsable(Responsable aResponsable) {
-		this._responsable = aResponsable;
+		return ciudadano;
 	}
 
 	public Responsable getResponsable() {
-		return this._responsable;
+		return responsable;
 	}
 
-	public void setTipo(String aTipo) {
-		this._tipo = aTipo;
+	public String getDireccion() {
+		return direccion;
 	}
 
 	public String getTipo() {
-		return this._tipo;
+		return tipo;
 	}
+
+	public void setCiudadano(Ciudadano ciudadano) {
+		this.ciudadano = ciudadano;
+	}
+
+	public void setResponsable(Responsable responsable) {
+		this.responsable = responsable;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 }

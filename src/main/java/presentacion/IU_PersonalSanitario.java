@@ -1,20 +1,37 @@
-package main.java.presentacion;
+package presentacion;
 
-import main.java.dominio.Ciudadano;
-import main.java.dominio.GestorCiudadano;
-import main.java.dominio.GestorUsuario;
+import dominio.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class IU_PersonalSanitario {
 
     private static JFrame frmCovidlandiak;
     private static JTextField txtDni;
-    private JTable table;
+    private static JTable table;
+    private static JButton btnNotificar;
+    private static GestorPersonalSanitario gps;
+    private JScrollPane scrollPane;
 
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                	IU_PersonalSanitario window = new IU_PersonalSanitario();
+                    window.frmCovidlandiak.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
     public IU_PersonalSanitario() {
         frmCovidlandiak = new JFrame();
@@ -24,52 +41,35 @@ public class IU_PersonalSanitario {
 
     private void initialize() {
 
-
+    	gps = new GestorPersonalSanitario();
         frmCovidlandiak.getContentPane().setBackground(Color.WHITE);
-        frmCovidlandiak.setTitle("COVIDLANDIA 2K19 - Registro de Usuario.");
+        frmCovidlandiak.setTitle("COVIDLANDIA 2K19 - Notificar Usuario.");
         frmCovidlandiak.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\img\\icon\\icon.png"));
-        frmCovidlandiak.setResizable(true);
-        frmCovidlandiak.setBounds(100, 100, 592, 555);
+        frmCovidlandiak.setResizable(false);
+        frmCovidlandiak.setBounds(100, 100, 715, 555);
         frmCovidlandiak.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmCovidlandiak.getContentPane().setLayout(null);
         frmCovidlandiak.setLocationRelativeTo(null);
 
-
-        List<Ciudadano> lista = GestorCiudadano.selectAllCiudadanos();
-        Object[][] datos = new Object[lista.size()][4];
-
-        for (int i = 0; i < lista.size(); i++) {
-            datos[i][0] = lista.get(i).getDni();
-            datos[i][1] = lista.get(i).getNombre();
-            datos[i][2] = lista.get(i).getNTarjetaSanitaria();
-            datos[i][3] = lista.get(i).getEmail();
-        }
-
-        JScrollPane scrollPane = new JScrollPane();
+        scrollPane = new JScrollPane();
         scrollPane.setToolTipText("");
         scrollPane.setBounds(10, 39, 680, 255);
-        frmCovidlandiak.add(scrollPane);
+        frmCovidlandiak.getContentPane().add(scrollPane);
 
         table = new JTable();
         table.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        table.setModel(new DefaultTableModel(datos, new String[]{"DNI", "NOMBRE", "N TARJETA SANITARIA", "EMAIL"}) {
-            Class[] columnTypes = new Class[]{String.class, Long.class};
-
-            /*public Class getColumnClass(int columnIndex) {
-                return columnTypes[columnIndex];
-            }*/
-
-            boolean[] columnEditables = new boolean[]{false, false};
-
-            public boolean isCellEditable(int row, int column) {
-                return columnEditables[column];
-            }
-        });
+        gps.rellenarTabla();
+        table.getSelectionModel().addListSelectionListener(gps.habBtnNotificar());
         scrollPane.setViewportView(table);
+        
+        btnNotificar = new JButton("Notificar");
+        btnNotificar.setEnabled(false);
+        btnNotificar.addActionListener(gps.btnNotificar());
+        btnNotificar.setBounds(272, 372, 159, 101);
+        frmCovidlandiak.getContentPane().add(btnNotificar);
 
 
     }
-
 
     public static JFrame getFrmCovidlandiak() {
         return frmCovidlandiak;
@@ -78,4 +78,20 @@ public class IU_PersonalSanitario {
     public static void setFrmCovidlandiak(JFrame frmCovidlandiak) {
         IU_PersonalSanitario.frmCovidlandiak = frmCovidlandiak;
     }
+
+	public static JTextField getTxtDni() {
+		return txtDni;
+	}
+
+	public static JTable getTable() {
+		return table;
+	}
+
+	public static JButton getBtnNotificar() {
+		return btnNotificar;
+	}
+
+	public static GestorPersonalSanitario getGps() {
+		return gps;
+	}
 }

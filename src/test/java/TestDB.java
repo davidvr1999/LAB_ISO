@@ -1,6 +1,5 @@
-package test.java;
 
-import main.java.persistencia.AgenteBD;
+import persistencia.*;
 
 public class TestDB {
 
