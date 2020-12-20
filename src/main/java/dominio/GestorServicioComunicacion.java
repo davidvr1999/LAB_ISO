@@ -44,7 +44,7 @@ public class GestorServicioComunicacion {
 	                    + "\n\nYa puedes ver el resultado de tu prueba. El número de informe es: "+ninforme
 	                    + "\n\nPuedes ver el resultado en nuestra aplicación (CovidLandia 2k19) o en nuestra página web: www.covidlandia2k19.com");
 
-	           // Transport.send(message);
+	            Transport.send(message);
 
 	            JOptionPane.showMessageDialog(null, "Mensaje mandado correctamente a \n"+c.getNombre().toUpperCase()+".", "HECHO!", JOptionPane.INFORMATION_MESSAGE);
 
