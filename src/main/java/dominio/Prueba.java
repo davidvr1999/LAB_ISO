@@ -1,13 +1,30 @@
 package dominio;
 
-public class Prueba {
-	private Ciudadano _ciudadano = getCiudadano();
+import java.util.Date;
 
-	public void setCiudadano(Ciudadano aCiudadano) {
-		this._ciudadano = aCiudadano;
+public class Prueba {
+	private Ciudadano ciudadano;
+	private Date fecha;
+
+	public Prueba(Ciudadano ciudadano, Date fecha) {
+		this.ciudadano = ciudadano;
+		this.fecha = fecha;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public Ciudadano getCiudadano() {
-		return this._ciudadano;
+		return ciudadano;
 	}
+
+	public void setCiudadano(Ciudadano ciudadano) {
+		this.ciudadano = ciudadano;
+	}
+	
 }
